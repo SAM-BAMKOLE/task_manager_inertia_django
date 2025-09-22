@@ -13,8 +13,9 @@ pip install --no-cache-dir -r requirements.txt
 
 # Install Node dependencies and build Vite assets
 cd task_frontend
-npm ci
-npm run build
+pnpm ci
+pnpm run build
+
 
 # Collect Django static files
 cd ..
