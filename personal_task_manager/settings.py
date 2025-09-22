@@ -61,6 +61,7 @@ MIDDLEWARE = [
 
     # THIRD PARTY
     'inertia.middleware.InertiaMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     # MINE
     'task.middleware.InertiaShareMiddleware',
