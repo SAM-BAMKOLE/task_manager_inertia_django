@@ -6,11 +6,11 @@ apt-get update
 apt-get install -y pkg-config default-libmysqlclient-dev build-essential curl
 
 # Install Node.js and npm
-apt-get install -y nodejs npm || {
-    # Fallback: Install Node.js and npm via nodesource if apt fails
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-    apt-get install -y nodejs
-}
+# apt-get install -y nodejs npm || {
+# Fallback: Install Node.js and npm via nodesource if apt fails
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt-get install -y nodejs
+# }
 
 # Install pnpm globally
 npm install -g pnpm || {
