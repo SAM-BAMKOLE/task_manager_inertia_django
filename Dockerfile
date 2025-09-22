@@ -31,4 +31,4 @@ RUN python manage.py collectstatic --noinput
 EXPOSE $PORT
 
 # Run migrations and start Gunicorn
-CMD ["sh", "-c", "python manage.py migrate && gunicorn yourproject.wsgi:application --bind 0.0.0.0:$PORT"]
+CMD ["sh", "-c", "python manage.py migrate && gunicorn personal_task_manager.wsgi:application --bind 0.0.0.0:$PORT"]
