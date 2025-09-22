@@ -8,7 +8,7 @@ apt-get install -y pkg-config default-libmysqlclient-dev build-essential curl
 # Install Node.js and npm
 apt-get install -y nodejs npm || {
     # Fallback: Install Node.js and npm via nodesource if apt fails
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
     apt-get install -y nodejs
 }
 
