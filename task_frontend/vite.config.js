@@ -1,0 +1,44 @@
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import tailwindcss from "@tailwindcss/vite";
+import { resolve } from "path";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [vue(), tailwindcss()],
+  root: "./",
+  base:
+    process.env.NODE_ENV === "production"
+      ? "/static/dist/"
+      : "http://localhost:5173/",
+  server: {
+    host: "localhost",
+    origin: "http://localhost:5173",
+    port: 5173,
+    strictPort: true,
+    // open: false,
+    // watch: {
+    //   usePolling: true,
+    //   disableGlobbing: false,
+    // },
+  },
+  resolve: {
+    extensions: [".js", ".json"],
+  },
+  build: {
+    outDir: "../static/dist",
+    // assetsDir: "",
+    emptyOutDir: true,
+    manifest: true,
+    target: "es2015",
+    rollupOptions: {
+      // input: {
+      //   main: "./src/main.js"),
+      // },
+      input: "./src/entry-client.js",
+      // output: {
+      //   chunkFileNames: undefined,
+      // },
+    },
+  },
+});
