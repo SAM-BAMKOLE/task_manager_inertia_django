@@ -5,17 +5,17 @@ set -eux
 apt-get update
 apt-get install -y pkg-config default-libmysqlclient-dev build-essential
 
-# Install Node.js and npm (for Vite)
-apt-get install -y nodejs npm
+# Install Node.js and pnpm
+apt-get install -y nodejs
+npm install -g pnpm
 
 # Install Python dependencies
 pip install --no-cache-dir -r requirements.txt
 
-# Install Node dependencies and build Vite assets
+# Install Node dependencies and build Vite assets with pnpm
 cd task_frontend
-pnpm ci
+pnpm install
 pnpm run build
-
 
 # Collect Django static files
 cd ..
