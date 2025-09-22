@@ -1,10 +1,13 @@
 # Use a base image with Python and Node.js
 FROM python:3.12-slim
 
-# Install Node.js and npm (for Vite)
+# Install Node.js, npm, and MySQL dependencies
 RUN apt-get update && apt-get install -y \
     nodejs \
     npm \
+    pkg-config \
+    default-libmysqlclient-dev \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
