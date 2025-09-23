@@ -126,7 +126,7 @@ const onSubmit = () => {
               <div class="space-y-1 flex items-center gap-3">
                 <div
                   v-if="selectedTags.length"
-                  class="flex items-center text-xs gap-1"
+                  class="flex flex-wrap w-full items-center text-xs gap-1"
                 >
                   <div
                     v-for="(tag, key) in selectedTags"

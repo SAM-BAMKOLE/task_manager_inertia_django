@@ -165,9 +165,11 @@ function updateTasksCompleted(e) {
           <table class="table">
             <thead>
               <tr>
-                <th class="w-1">
-                  <label class="flex flex-col gap-1">
-                    <span class="text-[9px]">Update all<br />status</span>
+                <th class="flex justify-center">
+                  <label class="flex items-center flex-col gap-1">
+                    <span class="text-[9px] text-center"
+                      >Update all<br />status</span
+                    >
                     <input
                       type="checkbox"
                       class="checkbox checkbox-primary checkbox-sm"
@@ -295,8 +297,8 @@ function updateTasksCompleted(e) {
               </tr>
                -->
               <tr v-for="task in tasks" :key="task.id">
-                <th>
-                  <label>
+                <th class="flex justify-center">
+                  <label class="">
                     <input
                       type="checkbox"
                       :checked="task.is_completed"
@@ -315,8 +317,8 @@ function updateTasksCompleted(e) {
                   </label>
                 </th>
                 <td>
-                  <div class="flex items-center gap-3">
-                    <div>
+                  <div class="">
+                    <div class="min-w-[12rem]">
                       <div class="font-bold">{{ task.title }}</div>
                       <div class="text-sm text-base-content/60">
                         {{ task.description }}

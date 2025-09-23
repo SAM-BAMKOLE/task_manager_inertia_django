@@ -170,10 +170,10 @@ INERTIA_LAYOUT = 'base.html'
 CSRF_HEADER_NAME = 'HTTP_X_XSRF_TOKEN'
 CSRF_COOKIE_NAME = 'XSRF-TOKEN'
 
-DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'static' / 'dist'
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'static'
 
 # If we should use HMR or not.
-DJANGO_VITE_DEV_MODE = not DEBUG
+DJANGO_VITE_DEV_MODE = DEBUG
 
 # we need this to get around cors issues
 DJANGO_VITE_DEV_SERVER_HOST = '127.0.0.1'
@@ -181,13 +181,21 @@ DJANGO_VITE_DEV_SERVER_URL = 'http://localhost:5173/'
 DJANGO_VITE_STATIC_URL_PREFIX = '/'
 
 DJANGO_VITE_DEV_SERVER_PORT = 5173
-DJANGO_VITE_MANIFEST_PATH = BASE_DIR / 'static' / 'dist' / 'manifest.json'
-DJANGO_VITE_BUILD_DIR = BASE_DIR / 'static' / 'dist'
-DJANGO_VITE_MODE = 'development' if DEBUG else 'production'
+DJANGO_VITE_MANIFEST_PATH = BASE_DIR / 'static' / 'manifest.json'
+# DJANGO_VITE_BUILD_DIR = BASE_DIR / 'static'
+# DJANGO_VITE_MODE = 'development' if DEBUG else 'production'
 
-STATICFILES_DIRS = [BASE_DIR / 'static' / 'dist']
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STORAGES = {
+    'default': {
+        "BACKEND": "django.core.files.storage.FileSystemStorage"
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    }
+}
 
 import sys
 LOGGING = {

@@ -124,7 +124,7 @@ const auth = computed(() => props.auth);
       </header>
 
       <!-- Page Content -->
-      <main class="flex-1 overflow-y-auto p-6 bg-base-100 relative">
+      <main class="flex-1 overflow-y-auto p-5 bg-base-100 relative">
         <!-- <Suspense>
           <template #default> -->
         <slot />

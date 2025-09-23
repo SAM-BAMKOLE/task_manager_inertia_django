@@ -33,7 +33,9 @@ import { Link } from "@inertiajs/vue3";
       </div>
     </div>
   </nav>
-  <slot />
+  <div class="p-5">
+    <slot />
+  </div>
   <!-- Footer -->
   <footer class="bg-base-200 border-t border-base-300 py-6 mt-16">
     <div

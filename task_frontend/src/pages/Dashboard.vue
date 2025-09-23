@@ -247,17 +247,19 @@ function deleteTask(id) {
                         class="checkbox checkbox-primary checkbox-sm"
                         v-model="task.is_completed"
                         @change="
-                          () =>
+                          () => {
                             router.post(
                               `/task/update/${task.id}`,
                               {
                                 _method: 'PATCH',
                               },
                               { forceFormData: true }
-                            )
+                            );
+                            router.reload();
+                          }
                         "
                       />
-                      <div>
+                      <div class="min-w-[12rem]">
                         <div class="font-bold">{{ task.title }}</div>
                         <div class="text-sm text-base-content/60">
                           {{ task.description }}

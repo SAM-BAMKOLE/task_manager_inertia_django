@@ -60,7 +60,7 @@ function deleteTask(id) {
                             )
                         "
                       />
-                      <div>
+                      <div class="min-w-[12rem]">
                         <div class="font-bold">{{ task.title }}</div>
                         <div class="text-sm text-base-content/60">
                           {{ task.description }}

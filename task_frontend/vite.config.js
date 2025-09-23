@@ -7,39 +7,27 @@ import { resolve } from "path";
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
   root: "./",
-  base:
-    process.env.NODE_ENV === "production"
-      ? "/static/dist/"
-      : "http://localhost:5173/",
+  // base:
+  //   process.env.NODE_ENV === "production"
+  //     ? "/static/dist/"
+  //     : "http://localhost:5173/",
   server: {
     host: "localhost",
     origin: "http://localhost:5173",
     port: 5173,
     strictPort: true,
-    // open: false,
-    // watch: {
-    //   usePolling: true,
-    //   disableGlobbing: false,
-    // },
   },
   resolve: {
     extensions: [".js", ".json"],
   },
   build: {
-    outDir: "../static/dist",
-    // assetsDir: "",
+    outDir: "../static",
     emptyOutDir: true,
     manifest: "manifest.json",
     target: "es2015",
     rollupOptions: {
-      // input: {
-      //   app: "src/entry-client.js",
-      // },
       input: "./src/entry-client.js",
-      // output: {
-      //   chunkFileNames: undefined,
-      // },
     },
-    // base: "../static/",
   },
+  base: "/static/",
 });

@@ -60,9 +60,9 @@ function submitProfileUpdate() {
               </div>
               <div class="form-control">
                 <label class="label">
-                  <span class="label-text"
-                    >Email Address (If you change, remember to use it when next
-                    you Login)</span
+                  <span class="label-text whitespace-break-spaces"
+                    >Email Address (If you change this, remember to use it when
+                    next you Login)</span
                   >
                 </label>
                 <input

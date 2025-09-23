@@ -13,7 +13,7 @@ defineProps({ title: String, description: String });
   </Head>
   <!-- Hero Section -->
   <section class="bg-base-100 py-16 min-h-[80dvh] flex items-center">
-    <div class="max-w-4xl mx-auto px-4 text-center">
+    <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-4xl font-extrabold text-primary mb-4">
         Welcome to TaskFlow
       </h2>
@@ -23,12 +23,12 @@ defineProps({ title: String, description: String });
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
         <Link href="/register">
-          <button class="btn btn-primary btn-lg normal-case">
+          <button class="btn btn-primary lg:btn-lg normal-case">
             Get Started
           </button>
         </Link>
         <Link href="/about">
-          <button class="btn btn-outline btn-primary btn-lg normal-case">
+          <button class="btn btn-outline btn-primary lg:btn-lg normal-case">
             Learn More
           </button>
         </Link>

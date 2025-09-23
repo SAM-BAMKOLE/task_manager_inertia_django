@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default, emerald;
+}
 
 @theme {
   --font-sans: "Inter", sans-serif;
@@ -24,3 +26,7 @@ h6 {
 /* .test {
   color: #2400a7
 } */
+
+button {
+  @apply whitespace-nowrap;
+}

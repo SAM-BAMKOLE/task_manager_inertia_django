@@ -14,7 +14,7 @@ defineProps({ title: String, description: String });
   <!-- Hero Section -->
   <div class="flex items-center justify-center min-h-[80dvh]">
     <section class="bg-base-100 py-16">
-      <div class="max-w-3xl mx-auto px-4 text-center">
+      <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-4xl font-extrabold text-primary mb-4">
           About TaskFlow
         </h2>
@@ -50,12 +50,12 @@ defineProps({ title: String, description: String });
         </div>
         <div class="mt-10 flex justify-center gap-4">
           <Link href="/register">
-            <button class="btn btn-primary btn-lg normal-case">
+            <button class="btn btn-primary lg:btn-lg normal-case">
               Try TaskFlow
             </button>
           </Link>
           <Link href="/">
-            <button class="btn btn-outline btn-primary btn-lg normal-case">
+            <button class="btn btn-outline btn-primary lg:btn-lg normal-case">
               Back to Home
             </button>
           </Link>
