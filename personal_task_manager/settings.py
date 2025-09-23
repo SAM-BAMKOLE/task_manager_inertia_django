@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third Party
-    "django_vite",
     "inertia",
+    "django_vite",
 
     # MINE
     "task",
@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'personal_task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if DEBUG:
+if not DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -170,23 +170,53 @@ INERTIA_LAYOUT = 'base.html'
 CSRF_HEADER_NAME = 'HTTP_X_XSRF_TOKEN'
 CSRF_COOKIE_NAME = 'XSRF-TOKEN'
 
-# DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'task_frontend' / 'dist' / 'client'
 DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'static' / 'dist'
 
 # If we should use HMR or not.
 DJANGO_VITE_DEV_MODE = DEBUG
 
 # we need this to get around cors issues
-# DJANGO_VITE_DEV_SERVER_HOST = '127.0.0.1'
+DJANGO_VITE_DEV_SERVER_HOST = '127.0.0.1'
 DJANGO_VITE_DEV_SERVER_URL = 'http://localhost:5173/'
 DJANGO_VITE_STATIC_URL_PREFIX = '/'
 
-# this is the default, but I'm leaving this here, so you know what to change if you want to run on a different port
-# DJANGO_VITE_PORT = 5173
-
 DJANGO_VITE_DEV_SERVER_PORT = 5173
-VITE_MANIFEST_PATH = BASE_DIR / 'static' / 'dist' / 'manifest.json'
+DJANGO_VITE_MANIFEST_PATH = BASE_DIR / 'static' / 'dist' / 'manifest.json'
+DJANGO_VITE_BUILD_DIR = BASE_DIR / 'static' / 'dist'
+DJANGO_VITE_MODE = 'development' if DEBUG else 'production'
 
-STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]
+STATICFILES_DIRS = [BASE_DIR / 'static' / 'dist']
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+import sys
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}

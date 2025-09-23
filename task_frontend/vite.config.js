@@ -29,16 +29,17 @@ export default defineConfig({
     outDir: "../static/dist",
     // assetsDir: "",
     emptyOutDir: true,
-    manifest: true,
+    manifest: "manifest.json",
     target: "es2015",
     rollupOptions: {
       // input: {
-      //   main: "./src/main.js"),
+      //   app: "src/entry-client.js",
       // },
       input: "./src/entry-client.js",
       // output: {
       //   chunkFileNames: undefined,
       // },
     },
+    // base: "../static/",
   },
 });
