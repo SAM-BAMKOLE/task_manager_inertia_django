@@ -2,7 +2,7 @@ name: Keep Render App Alive
 
 on:
   schedule:
-    - cron: "*/7 * * * *" # Every 7 minutes
+    - cron: "*/7 * * * *" # every 7 minutes
   workflow_dispatch:
 
 jobs:
@@ -14,14 +14,23 @@ jobs:
         with:
           node-version: 20
 
+      - name: Restore ping timestamp
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: .last-ping
+          key: ping-timestamp
+
       - name: Ping Render App
         run: |
           node <<'EOF'
+          const fs = require("fs");
           const https = require("https");
 
           const url = "https://task-manager-inertia-django.onrender.com";
           const now = new Date();
-          const hour = now.getUTCHours() + 1; // UTC is 1 hour behind WAT
+          const hour = now.getUTCHours() + 1; // adjust if needed
+          const tsFile = ".last-ping";
 
           // Skip quiet hours
           if (hour >= 23 || hour < 6) {
@@ -29,16 +38,41 @@ jobs:
             process.exit(0);
           }
 
-          // Random chance: ~every 7–12 min (by skipping some runs)
-          const chance = Math.random();
-          if (chance < 0.6) { // about 60% of the time, it will ping
-            https.get(url, (res) => {
+          // Read last ping timestamp if exists
+          let lastPing = 0;
+          if (fs.existsSync(tsFile)) {
+            lastPing = parseInt(fs.readFileSync(tsFile, "utf8"), 10) || 0;
+          }
+
+          const elapsedMin = (Date.now() - lastPing) / 60000;
+          const forcePing = elapsedMin >= 12;
+
+          if (forcePing || Math.random() < 0.6) {
+            console.log(forcePing ? "⏰ Forced ping (>=12 min)" : "🎲 Random ping");
+            const req = https.get(url, (res) => {
               console.log(`✅ Pinged ${url}, status: ${res.statusCode}`);
-            }).on("error", (err) => {
+
+              res.on("data", () => {}); // drain data
+              res.on("end", () => {
+                fs.writeFileSync(tsFile, String(Date.now())); // update timestamp
+                console.log("🔚 Response ended cleanly.");
+                process.exit(0);
+              });
+            });
+
+            req.on("error", (err) => {
               console.error("❌ Error:", err.message);
               process.exit(1);
             });
           } else {
             console.log("⏭️ Skipping this run (random delay emulation).");
+            process.exit(0);
           }
           EOF
+
+      - name: Save ping timestamp
+        if: success()
+        uses: actions/cache@v4
+        with:
+          path: .last-ping
+          key: ping-timestamp
