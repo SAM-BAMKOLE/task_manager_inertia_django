@@ -11,16 +11,14 @@ const props = defineProps({
 });
 
 const tasks = computed(() => props.tasks_data.latest_tasks);
-const completed = props.tasks_data.completed_count;
-const uncompleted = props.tasks_data.uncompleted_count;
-const overdue = props.tasks_data.overdue_count;
-const taskCount = props.tasks_data.count;
+const completed = computed(() => props.tasks_data.completed_count);
+const uncompleted = computed(() => props.tasks_data.uncompleted_count);
+const overdue = computed(() => props.tasks_data.overdue_count);
+const taskCount = computed(() => props.tasks_data.count);
 
 const deleteForm = useForm({ _method: "DELETE" });
 function deleteTask(id) {
   deleteForm.post(`/task/delete/${id}`, { forceFormData: true });
-  // router.get("/dashboard/");
-  router.reload();
 }
 </script>
 <template>

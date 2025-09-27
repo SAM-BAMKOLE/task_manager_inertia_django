@@ -91,26 +91,26 @@ WSGI_APPLICATION = 'personal_task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if not DEBUG:
-    DATABASES = {
+# if not DEBUG:
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
-    }
-else:
-    DATABASES = {
-        'default': {
-            # 'ENGINE': 'django.db.backends.sqlite3',
-            # 'NAME': BASE_DIR / 'db.sqlite3',
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT'),
-        }
-    }
+}
+# else:
+#     DATABASES = {
+#         'default': {
+#             # 'ENGINE': 'django.db.backends.sqlite3',
+#             # 'NAME': BASE_DIR / 'db.sqlite3',
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': config('DB_NAME'),
+#             'USER': config('DB_USER'),
+#             'PASSWORD': config('DB_PASSWORD'),
+#             'HOST': config('DB_HOST'),
+#             'PORT': config('DB_PORT'),
+#         }
+#     }
 
 
 # Password validation
@@ -173,17 +173,16 @@ CSRF_COOKIE_NAME = 'XSRF-TOKEN'
 DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'static'
 
 # If we should use HMR or not.
-DJANGO_VITE_DEV_MODE = not DEBUG
+DJANGO_VITE_DEV_MODE = DEBUG
 
 # we need this to get around cors issues
 DJANGO_VITE_DEV_SERVER_HOST = '127.0.0.1'
 DJANGO_VITE_DEV_SERVER_URL = 'http://localhost:5173/'
-DJANGO_VITE_STATIC_URL_PREFIX = '/'
+if DEBUG:
+    DJANGO_VITE_STATIC_URL_PREFIX = '/'
 
 DJANGO_VITE_DEV_SERVER_PORT = 5173
 DJANGO_VITE_MANIFEST_PATH = BASE_DIR / 'static' / 'manifest.json'
-# DJANGO_VITE_BUILD_DIR = BASE_DIR / 'static'
-# DJANGO_VITE_MODE = 'development' if DEBUG else 'production'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 

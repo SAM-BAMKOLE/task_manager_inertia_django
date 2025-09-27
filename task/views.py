@@ -60,6 +60,7 @@ def tasks_page(request: HttpRequest):
     if request.GET.get('status') and request.GET.get('status') != 'ALL':
         if request.GET.get('status') == 'OVERDUE':
             filters['due_date__lt'] = date.today()
+            filters['is_completed'] = False
         else:
             filters['is_completed'] = request.GET.get('status')
         # all_tasks = Task.objects.filter(owner=request.user, is_completed=request.GET.get('status')).order_by('-created_at')
@@ -80,6 +81,7 @@ def tasks_page(request: HttpRequest):
             'has_next': page_obj.has_next()
         }
     }
+
     props['page_obj'] = data
     return props
 

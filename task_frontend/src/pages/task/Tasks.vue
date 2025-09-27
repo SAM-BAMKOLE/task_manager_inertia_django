@@ -4,6 +4,9 @@ import { Link, router, usePage, useForm } from "@inertiajs/vue3";
 const props = defineProps({ page_obj: Object });
 const tasks = computed(() => props.page_obj.tasks);
 
+const allChecked = ref(false);
+allChecked.value = tasks.value.every((item) => item.is_completed);
+
 const page = usePage();
 const pageQuery = computed(function () {
   const page_url = new URL(page.url, window.location.origin);
@@ -47,7 +50,7 @@ const deleteForm = useForm({ _method: "DELETE" });
 
 function deleteTask(id) {
   deleteForm.post(`/task/delete/${id}`, { forceFormData: true });
-  router.reload();
+  // router.reload();
 }
 
 function prevPage() {
@@ -173,6 +176,7 @@ function updateTasksCompleted(e) {
                     <input
                       type="checkbox"
                       class="checkbox checkbox-primary checkbox-sm"
+                      :checked="allChecked"
                       @change="(e) => updateTasksCompleted(e.target.checked)"
                     />
                   </label>
