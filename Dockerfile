@@ -31,4 +31,4 @@ WORKDIR /app
 # Collect static
 RUN python manage.py collectstatic --noinput
 
-CMD gunicorn yourproject.wsgi:application --bind 0.0.0.0:8000
+CMD gunicorn personal_task_manager.wsgi:application --bind 0.0.0.0:8000

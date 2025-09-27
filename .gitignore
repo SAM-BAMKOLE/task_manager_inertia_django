@@ -4,6 +4,6 @@ db.sqlite3
 __pycache__
 .vscode
 .env
-static/*
-static/manifest.json
+# static/*
+# static/manifest.json
 staticfiles
