@@ -1,0 +1,52 @@
+name: Keep Render App Alive
+
+on:
+  schedule:
+    - cron: "*/7 * * * *" # Runs every 7 minutes
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Ping Render App
+        run: |
+          node <<'EOF'
+          const https = require("https");
+
+          // === CONFIG ===
+          const url = "https://task-manager-inertia-django.onrender.com";
+          const minDelay = 7;  // minutes
+          const maxDelay = 12; // minutes
+          const now = new Date();
+
+          // Get current hour (UTC)
+          const hour = now.getUTCHours() + 1 // UTC is 1 hour behind WAT;
+
+          // Stop between 23:00 - 06:00 UTC
+          if (hour >= 23 || hour < 6) {
+            console.log("⏸️ Skipping ping: quiet hours.");
+            process.exit(0);
+          }
+
+          // Random delay between min and max
+          const delayMinutes = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
+          console.log(`⏳ Waiting ${delayMinutes} minutes before ping...`);
+
+          setTimeout(() => {
+            https.get(url, (res) => {
+              console.log(`✅ Pinged ${url}, status: ${res.statusCode}`);
+            }).on("error", (err) => {
+              console.error("❌ Error:", err.message);
+              process.exit(1);
+            });
+          }, delayMinutes * 60 * 1000);
+          EOF
