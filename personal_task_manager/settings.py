@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-g)6)_4no_ly*_fm@7w&nn#vxv)^&$nq8(u#6fo+-g2cxb_%vi9
 DEBUG = config('APP_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ["task-manager-inertia-django.onrender.com", '.leapcell.dev', '.leapcell.app', '127.0.0.1', 'localhost']
-CSRF_TRUSTED_ORIGINS = ["task-manager-inertia-django.onrender.com", 'https://*.leapcell.dev', 'https://*.leapcell.dev']
+CSRF_TRUSTED_ORIGINS = ["https://task-manager-inertia-django.onrender.com", 'https://*.leapcell.dev', 'https://*.leapcell.dev']
 
 
 # Application definition
